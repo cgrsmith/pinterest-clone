@@ -14,7 +14,8 @@ router
                 .select("title image")
                 .sort({createdAt : "desc"})
                 .populate("user", {
-                    username : true
+                    username : true,
+                    profileImage: true
                 })
                 .limit(10);
 
@@ -58,9 +59,13 @@ router
                     username : true,
                     profileImage : true
                 })
-                .populate("comments", {
-                    text : true,
-                    user : true
+                .populate({
+                    path : "comments",
+                    select : "user text",
+                    populate : {
+                        path : "user",
+                        select : "username"
+                    }
             });
             return res.status(200).json(post);
         } catch(err) {

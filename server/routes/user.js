@@ -7,24 +7,6 @@ const db = require("../models/index");
 //routed to api/user
 
 router
-    .route("/:id")
-    .get(async function(req, res, next) {
-        try {
-            let user = await db.User.findById(req.params.id)
-                .populate("posts", {
-                    title : true
-                })
-                .populate("comments", {
-                    text : true,
-                    post : true
-                });
-            return res.status(200).json(user);
-        } catch(err) {
-            return next(err);
-        }
-    });
-
-router
     .route("/signup")
     .post(async function(req, res, next) {
         try {
@@ -90,6 +72,24 @@ router
                 status : 400,
                 //message : "Invalid email/password"
             });
+        }
+    });
+
+router
+    .route("/:id")
+    .get(async function(req, res, next) {
+        try {
+            let user = await db.User.findById(req.params.id)
+                .populate("posts", {
+                    title : true
+                })
+                .populate("comments", {
+                    text : true,
+                    post : true
+                });
+            return res.status(200).json(user);
+        } catch(err) {
+            return next(err);
         }
     });
 
