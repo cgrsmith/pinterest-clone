@@ -38,18 +38,23 @@ const UserSchema = new mongoose.Schema({
     timestamps : true
 });
 
+//If password is modified/created, hash
 UserSchema.pre("save", async function(next) {
     try {
-        //implement hash
+        if(!this.isModified("password")) {
+            return next;
+        }
+        this.password = await bcrypt.hash(this.password, 10);
     } catch(err) {
         return next(err);
     }
 });
 
+//Compare hashed passwords
 UserSchema.methods.comparePassword = async function(candidatePassword, next) {
     try {
         //implement bcrypt comparison
-        return isMatch = (candidatePassword === this.password);
+        return isMatch = await bcrypt.compare(candidatePassword, this.password);
     } catch(err) {
         return next(err);
     }

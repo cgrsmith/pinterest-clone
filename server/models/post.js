@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./user");
 
 const PostSchema = new mongoose.Schema({
     image : {
@@ -25,6 +26,20 @@ const PostSchema = new mongoose.Schema({
     }]
 }, {
     timestamps : true
+});
+
+//If Post is deleted, remove it from the User model 
+PostSchema.pre("remove", async function(next) {
+    try {
+        let user = await User.findById(this.user);
+        user.comments.remove(this.id);
+        await user.save();
+        return next();
+        
+    } catch(err) {
+        return next(err);
+    }
+
 });
 
 const Post = mongoose.model("Post", PostSchema);
