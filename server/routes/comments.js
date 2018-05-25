@@ -7,6 +7,20 @@ const db = require("../models/index");
 
 router
     .route("/")
+    .get(async function (req, res, next) {
+        try {
+            let comments = await db.Comment.find({post : req.params.id})
+                .sort({createdAt : "desc"})
+                .populate("user", {
+                    username : true,
+                    profileImage : true
+                })
+                .limit(20);
+            return res.status(200).json(comments);
+        } catch(err) {
+            return next(err);
+        }
+    })
     .post(async function(req, res, next) {
         try {
             let comment = await db.Comment.create({

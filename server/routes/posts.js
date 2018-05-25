@@ -14,10 +14,9 @@ router
                 .select("title image")
                 .sort({createdAt : "desc"})
                 .populate("user", {
-                    username : true,
-                    profileImage: true
+                    username : true
                 })
-                .limit(10);
+                .limit(20);
 
             return res.status(200).json(posts);
         } catch(err) {
@@ -59,14 +58,15 @@ router
                     username : true,
                     profileImage : true
                 })
-                .populate({
-                    path : "comments",
-                    select : "user text",
-                    populate : {
-                        path : "user",
-                        select : "username"
-                    }
-            });
+            // Comment population moved to seperate route
+            //     .populate({
+            //         path : "comments",
+            //         select : "user text",
+            //         populate : {
+            //             path : "user",
+            //             select : "username"
+            //         }
+            // });
             return res.status(200).json(post);
         } catch(err) {
             return next(err);

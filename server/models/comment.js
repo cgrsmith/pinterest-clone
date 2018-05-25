@@ -23,6 +23,7 @@ const CommentSchema = new mongoose.Schema({
 //If Comment is deleted, remove it from the User model and Post Model
 CommentSchema.pre("remove", async function(next) {
     try {
+        console.log(1)
         let user = await User.findById(this.user);
         user.comments.remove(this.id);
         await user.save();
