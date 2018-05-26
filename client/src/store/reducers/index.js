@@ -12,6 +12,8 @@ const initialState = {
 
     currentPost : {},
 
+    userProfileView : {},
+
     currentComments : []
 }
 
@@ -37,15 +39,22 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 posts : action.posts
             };
+        case "Delete_Post" :
+            return  {
+                ...state,
+                posts : state.posts.filter(post => post._id !== action.id)
+            };
+        //Single Post Reducers
         case "Load_Single_Post" :
             return {
                 ...state,
                 currentPost : action.post
             };
-        case "Delete_Post" :
-            return  {
+        //User profile view reducers
+        case "Load_User_Profile" :
+            return {
                 ...state,
-                posts : state.posts.filter(post => post._id !== action.id)
+                userProfileView : action.user
             };
         //Comment Reducers
         case "Load_Comments" :

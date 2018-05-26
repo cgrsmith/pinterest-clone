@@ -45,18 +45,19 @@ router
 
 router
     .route("/:commentId")
-    .put(async function(req, res, next) {
-        try {
-            let updatedComment = await db.Comment.findByIdAndUpdate(req.params.commentId, {
-                text : req.body.text
-            }, {
-                new : true
-            });
-            return res.status(200).json(updatedComment);
-        } catch(err) {
-            return next(err);
-        }
-    })
+    // Not sold on comment editing
+    // .put(async function(req, res, next) {
+    //     try {
+    //         let updatedComment = await db.Comment.findByIdAndUpdate(req.params.commentId, {
+    //             text : req.body.text
+    //         }, {
+    //             new : true
+    //         });
+    //         return res.status(200).json(updatedComment);
+    //     } catch(err) {
+    //         return next(err);
+    //     }
+    // })
     .delete(async function(req, res, next) {
         try {
             let deletedComment = await db.Comment.findByIdAndRemove(req.params.commentId);
