@@ -1,73 +1,17 @@
+import {combineReducers} from "redux";
 
+import currentUser from "./currentUser";
+import posts from "./posts";
+import comments from "./comments";
+import other from "./other";
+import singleView from "./singleView";
 
-const initialState = {
-    errorMessage : null,
+const rootReducer = combineReducers({
+    currentUser : currentUser,
+    posts : posts,
+    other : other,
+    comments : comments,
+    singleView : singleView
+});
 
-    isLoading : true,
-
-    isAuthenticated : false,
-    user : {},
-
-    posts : [],
-
-    currentPost : {},
-
-    userProfileView : {},
-
-    currentComments : []
-}
-
-export default function rootReducer(state = initialState, action) {
-    switch(action.type) {
-        //Error Reducers
-        case "Add_Error" :
-            return {...state, errorMessage : action.error};
-        case "Clear_Error" :
-            return {...state, errorMessage : null};
-        case "Page_Is_Loading" :
-            return {...state, errorMessage : action.isLoading};
-        //User Reducers
-        case "Set_Current_User" :
-            return {
-                ...state, 
-                isAuthenticated : Object.keys(action.user) > 0,
-                user : action.user
-            };
-        //Post Reducers
-        case "Load_Posts" :
-            return {
-                ...state,
-                posts : action.posts
-            };
-        case "Delete_Post" :
-            return  {
-                ...state,
-                posts : state.posts.filter(post => post._id !== action.id)
-            };
-        //Single Post Reducers
-        case "Load_Single_Post" :
-            return {
-                ...state,
-                currentPost : action.post
-            };
-        //User profile view reducers
-        case "Load_User_Profile" :
-            return {
-                ...state,
-                userProfileView : action.user
-            };
-        //Comment Reducers
-        case "Load_Comments" :
-            return {
-                ...state,
-                currentComments : action.comments
-            };
-        case "Delete_Comment" :
-            return  {
-                ...state,
-                currentComments : state.currentComments.filter(post => post._id !== action.id)
-            };
-        default :
-            return state;
-    }
-}
+export default rootReducer;
