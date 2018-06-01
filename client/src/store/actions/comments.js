@@ -2,10 +2,18 @@ import axios from "axios";
 import {addError, clearError} from "./errors";
 
 //Comment ACtions
-function loadComments(comments) {
+function loadComments(postId, comments) {
     return {
         type : "Load_Comments",
+        commentsPost : postId, 
         comments : comments
+    }
+}
+
+function addComment(newComment) {
+    return {
+        type : "Add_Comment",
+        newComment : newComment
     }
 }
 
@@ -20,7 +28,7 @@ export function getComments(postId) {
     return function(dispatch) {
         return axios.get("/api/posts/" + postId +"/comments")
             .then( res => {
-                dispatch(loadComments(res));
+                dispatch(loadComments(postId, res.data));
             })
             .catch(err =>{
                 dispatch(addError(err.message));
@@ -30,9 +38,9 @@ export function getComments(postId) {
 
 export function createNewComment(postId, newComment) {
     return function(dispatch, getState) {
-        return axios.post("/api/posts/" + postId +"/comments", newPost)
+        return axios.post("/api/posts/" + postId +"/comments", newComment)
             .then( res => {
-                //do nothing
+                dispatch(addComment(newComment));
             })
             .catch(err =>{
                 dispatch(addError(err.message));

@@ -91,7 +91,20 @@ router
         } catch(err) {
             return next(err);
         }
-    });
-    //IMPLEMENT PUT
+    })
+    .put(async function(req, res, next) {
+        try {
+            let updatedUser = await db.User.findByIdAndUpdate(req.params.id, {
+                profileText : req.body.profileText,
+                profileImage : req.body.profileImage
+            }, {
+                new : true
+            });
+
+            return res.status(200).json(updatedUser);
+        } catch(err) {
+            return next(err);
+        }
+    })
 
 module.exports = router;

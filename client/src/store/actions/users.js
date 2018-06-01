@@ -12,7 +12,7 @@ export function getUser(userId) {
     return function(dispatch) {
         return axios.get("/api/user/" + userId)
             .then(res => {
-                loadUserProfile(res);
+                dispatch(loadUserProfile(res.data));
             })
             .catch(err => {
                 dispatch(addError(err.message));
@@ -24,7 +24,7 @@ export function editUser(userId, editedUser) {
     return function(dispatch) {
         return axios.put("/api/user/" + userId, editedUser)
             .then(res => {
-                loadUserProfile(res);
+                dispatch(loadUserProfile(res.data));
             })
             .catch(err => {
                 dispatch(addError(err.message));

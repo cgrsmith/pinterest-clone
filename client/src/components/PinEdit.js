@@ -1,16 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 
-import {createNewPost} from "../store/actions/posts";
+import {editSinglePost, getSinglePost} from "../store/actions/posts";
 
 //Used to create and edit a Pin
-class PinForm extends Component {
+class PinEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
             postTitle : "",
-            postDescription : "",
-            postImage : ""
+            postDescription : ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -22,35 +21,35 @@ class PinForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
         let postSubmission = {
             title : this.state.postTitle,
-            description : this.state.postDescription,
-            image : this.state.postImage,
-            user : this.props.currentUser.id
+            description : this.state.postDescription
         }
-        this.props.createNewPost(postSubmission)
+        this.props.editSinglePost(this.props.postId, postSubmission)
             .then(() => {
                 this.setState({postTitle : "", postDescription : "", postImage : ""});
-                this.props.history.push("/");
+                this.props.history.push("/posts/" + this.props.postId);
             })
             .catch(err => {
                 return err;
             });
     }
 
+    componentWillMount() {
+        //prefill
+        //this.props.getSinglePost(this.props.postid)
+        this.setState({postTitle : this.props.post.title, postDescription : this.props.post.description})
+    }
+
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <p>Create Post</p> 
+                    <p>Edit Post</p> 
                     <div>
                         <label>Post Title: </label>
                         <input type="text" placeholder="" name="postTitle" value={this.state["postTitle"]}
-                            onChange={this.handleChange} />
-                    </div>
-                    <div>
-                        <label>Post Image: </label>
-                        <input type="text" placeholder="" name="postImage" value={this.state["postImage"]}
                             onChange={this.handleChange} />
                     </div>
                     <div>
@@ -60,7 +59,7 @@ class PinForm extends Component {
                     </div>
 
                     <button type="submit">
-                    Submit
+                        Submit
                     </button>
                 </form> 
             </div>
@@ -70,8 +69,9 @@ class PinForm extends Component {
 
 function mapStateToProps(state, props){
     return {
-        currentUser : state.currentUser.user
+        postId : props.postId,
+        post : state.singlePost.post
     }
 }
 
-export default connect(mapStateToProps, {createNewPost})(PinForm);
+export default connect(mapStateToProps, {editSinglePost, getSinglePost})(PinEdit);

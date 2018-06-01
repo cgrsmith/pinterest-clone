@@ -7,6 +7,7 @@ class AuthForm extends Component {
             email : "",
             username : "",
             profileImage : "",
+            profileText : "",
             password : "",
             confirmPassword : ""
         }
@@ -61,11 +62,20 @@ class AuthForm extends Component {
                                 onChange={this.handleChange} />
                         </div>
                         <div>
+                            <label>Profile Text: </label>
+                            <input type="text" placeholder="" name="profileText" value={this.state["profileText"]}
+                                onChange={this.handleChange} />
+                        </div>
+                        <div>
                             <label>Password: </label>
                             <input type="text" placeholder="" name="password" value={this.state["password"]}
                                 onChange={this.handleChange} required />
                         </div>
-
+                        <div>
+                            <label>Confirm Password: </label>
+                            <input type="text" placeholder="" name="confirmPassword" value={this.state["confirmPassword"]}
+                                onChange={this.handleChange} required />
+                        </div>
                         <button type="submit">
                             Sign Up
                         </button>

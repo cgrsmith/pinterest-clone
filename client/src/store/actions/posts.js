@@ -26,7 +26,7 @@ export function getPosts() {
     return function(dispatch) {
         return axios.get("/api/posts")
             .then( res => {
-                dispatch(loadPosts(res));
+                dispatch(loadPosts(res.data));
             })
             .catch(err =>{
                 dispatch(addError(err.message));
@@ -50,7 +50,7 @@ export function getSinglePost(postId) {
     return function(dispatch) {
         return axios.get("/api/posts/" + postId)
             .then( res => {
-                dispatch(loadSinglePost(res));
+                dispatch(loadSinglePost(res.data));
             })
             .catch(err =>{
                 dispatch(addError(err.message));
@@ -62,7 +62,7 @@ export function editSinglePost(postId, editedPost) {
     return function(dispatch) {
         return axios.put("/api/posts/" + postId, editedPost)
             .then( res => {
-                dispatch(loadSinglePost(res));
+                dispatch(loadSinglePost(res.data));
             })
             .catch(err =>{
                 dispatch(addError(err.message));
@@ -74,7 +74,7 @@ export function removePost(postId) {
     return function(dispatch) {
         return axios.delete("/api/posts/" + postId)
             .then( res => {
-                dispatch(deletePost(res));
+                dispatch(deletePost(postId));
             })
             .catch(err =>{
                 dispatch(addError(err.message));

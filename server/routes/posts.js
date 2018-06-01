@@ -11,7 +11,7 @@ router
     .get(async function(req, res, next) {
         try {
             let posts = await db.Post.find()
-                .select("title image")
+                .select("title image createdAt")
                 .sort({createdAt : "desc"})
                 .populate("user", {
                     username : true

@@ -1,6 +1,7 @@
 
 
 const initialState = {
+    commentsPost : null,
     currentComments : []
 }
 
@@ -10,7 +11,13 @@ export default function(state = initialState, action) {
         case "Load_Comments" :
             return {
                 ...state,
+                commentsPost : action.commentsPost,
                 currentComments : action.comments
+            };
+        case "Add_Comment" :
+            return {
+                ...state,
+                currentComments : [action.newComment, ...state.currentComments]
             };
         case "Delete_Comment" :
             return  {
