@@ -1,0 +1,65 @@
+@import "base.scss";
+
+.pinBoard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 16px;
+    .pin {
+        position: relative;
+
+        height: 360px;
+        width: 260px;
+        background-color: rgb(83, 77, 105);
+        
+        border-radius: 16px;
+
+
+        margin: 32px 24px;
+        img {
+            //position: absolute;
+            filter: brightness(100%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            
+        }
+        .pinLabel {
+            position: absolute;
+            
+            left: 5%;
+            bottom: 5%;
+
+
+            padding: 4px 16px 4px 8px;
+            background-color: $colorSecondary;
+            
+            border-radius: 8px;
+            display: none;
+            h4, .pinTime {
+                margin: 0.2em 0;
+            }
+            h4 {
+                color: #444;
+                font-weight: bold;
+            }
+            .pinTime {
+                color: $colorDarkest;
+                font-weight: lighter;
+                font-size: x-small;
+            }
+        }
+
+        &:hover {
+            img{
+                filter: brightness(70%);
+                transition: all 0.3s ease;
+            }
+            .pinLabel {
+                display: block;
+            }
+        }
+    }
+}

@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import Moment from "react-moment";
 import {getSinglePost, editSinglePost, deletePost} from "../store/actions/posts";
 
 import CommentsList from "./CommentsList";
+
+import testPic from "../images/testPic.jpg";
 
 class PinEnlarged extends Component {
     constructor(props) {
@@ -17,11 +20,13 @@ class PinEnlarged extends Component {
     render() {
         let thisPost =  this.props.post._id === this.props.postId ?
             <div>
-                <img src=""/>
-                <h4>{this.props.post.title}</h4>
-                <p>Created {this.props.post.createdAt}</p>
+                <img src={testPic}/>
+                <h2>{this.props.post.title}</h2>
+                <span>Posted </span>
+                <Moment className="commentTime" format="DD-MM-YYYY">{this.props.post.createdAt}</Moment>
+                <span> by </span>
                 <Link to={"/user/"+this.props.post.user._id}>
-                    <p>Created by: {this.props.post.user.username}</p>
+                    <span>{this.props.post.user.username}</span>
                 </Link>
                 <p>{this.props.post.description}</p>
                 {this.props.currentUser.id === this.props.post.user._id ? //Only show post edit if profile is current user
@@ -40,7 +45,7 @@ class PinEnlarged extends Component {
 
 
         return (
-            <div>
+            <div className="pinDisplay">
                 {thisPost}
                 <CommentsList postId={this.props.postId}/>
             </div>

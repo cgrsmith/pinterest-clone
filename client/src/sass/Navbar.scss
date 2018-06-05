@@ -1,0 +1,60 @@
+
+$colorPrimary: #FF0044;
+$colorSecondary: rgb(255, 225, 232);
+
+* {
+    font-family: Helvetica, sans-serif;
+}
+
+.navTop {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: $colorPrimary;
+    color: $colorSecondary; 
+
+    height: 80px;
+
+    .navListRight {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-right: 1.4em;
+    }
+
+    .navLogo {
+
+        padding: 1em;
+        padding-left: 1.4em;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        h2 {
+            margin: 0;
+        }
+
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .navLink {
+        padding: 1.4em 0.6em;
+        font-weight: 600;
+        color: inherit;
+        text-decoration: none;
+        &:hover {
+            color: white;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

@@ -40,7 +40,7 @@ export function createNewComment(postId, newComment) {
     return function(dispatch, getState) {
         return axios.post("/api/posts/" + postId +"/comments", newComment)
             .then( res => {
-                dispatch(addComment(newComment));
+                dispatch(addComment(res.data));
             })
             .catch(err =>{
                 dispatch(addError(err.message));

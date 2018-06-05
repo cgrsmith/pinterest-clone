@@ -42,39 +42,39 @@ class AuthForm extends Component {
     render() {
 
         return (
-            <div>
+            <div className="form">
                 {this.props.signup ?
                     <form onSubmit={this.handleSubmit}>
-                        <p>signup</p> 
-                        <div>
+                        <h2>signup</h2> 
+                        <div className="formSegment">
                             <label>Email Address: </label>
                             <input type="text" placeholder="" name="email" value={this.state["email"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required  className="input inputSmall"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Username: </label>
                             <input type="text" placeholder="" name="username" value={this.state["username"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Profile Image: </label>
                             <input type="text" placeholder="" name="profileImage" value={this.state["profileImage"]}
-                                onChange={this.handleChange} />
+                                onChange={this.handleChange} className="input inputSmall"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Profile Text: </label>
-                            <input type="text" placeholder="" name="profileText" value={this.state["profileText"]}
-                                onChange={this.handleChange} />
+                            <textarea name="profileText" value={this.state["profileText"]} 
+                                onChange={this.handleChange} className="input inputTextarea"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Password: </label>
                             <input type="text" placeholder="" name="password" value={this.state["password"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Confirm Password: </label>
                             <input type="text" placeholder="" name="confirmPassword" value={this.state["confirmPassword"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
                         <button type="submit">
                             Sign Up
@@ -82,16 +82,16 @@ class AuthForm extends Component {
                     </form> 
                 :
                     <form onSubmit={this.handleSubmit}>
-                        <p>signin</p> 
-                        <div>
+                        <h2>signin</h2> 
+                        <div className="formSegment">
                             <label>Email Address: </label>
                             <input type="text" placeholder="" name="email" value={this.state["email"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
-                        <div>
+                        <div className="formSegment">
                             <label>Password: </label>
                             <input type="text" placeholder="" name="password" value={this.state["password"]}
-                                onChange={this.handleChange} required />
+                                onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
 
                         <button type="submit">

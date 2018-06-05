@@ -3,6 +3,7 @@ import {Switch, Route, withRouter, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {authUser} from "../store/actions/auth";
+import withAuth from "../hocs/withAuth";
 
 import "../style.css";
 import AuthForm from "./AuthForm";
@@ -18,27 +19,30 @@ class Main extends Component {
         super(props);
     }
     render() {
+        const AuthedUserProfileEdit = withAuth(UserProfileEdit); 
+        const AuthedPinEdit = withAuth(PinEdit); 
+        const AuthedPinForm = withAuth(PinForm); 
         return (
-            <div>
+            <main>
                 <Switch>
                     <Route exact path="/" render={() => <Redirect to="/posts" />} />
                     <Route exact path="/posts" render={props => 
                         <PinBoard />} 
                     />
                     <Route exact path="/posts/new" render={props => 
-                        <PinForm  postId={props.match.params.id} {...props}/>} 
+                        <AuthedPinForm  postId={props.match.params.id} {...props}/>} 
                     />
                     <Route exact path="/posts/:id" render={props => 
                         <PinEnlarged  postId={props.match.params.id} />} 
                     />
                     <Route exact path="/posts/:id/edit" render={props => 
-                        <PinEdit  postId={props.match.params.id} {...props}/>} 
+                        <AuthedPinEdit  postId={props.match.params.id} {...props}/>} 
                     />
                     <Route exact path="/user/:id" render={props => 
                         <UserProfile userId={props.match.params.id}/>} 
                     />
                     <Route exact path="/user/:id/edit" render={props => 
-                        <UserProfileEdit userId={props.match.params.id} {...props}/>} 
+                        <AuthedUserProfileEdit userId={props.match.params.id} {...props}/>} 
                     />
                     <Route exact path="/signin" render={props => 
                         <AuthForm signup={false} authUser={this.props.authUser} {...props}/>} 
@@ -49,7 +53,7 @@ class Main extends Component {
                     
                     
                 </Switch>
-            </div>
+            </main>
         )
     }
 }

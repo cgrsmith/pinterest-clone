@@ -1,3 +1,268 @@
-.App {
+.App, body {
   margin: 0;
   padding: 0; }
+
+main {
+  margin-top: 80px; }
+
+* {
+  font-family: Helvetica, sans-serif; }
+
+.navTop {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #FF0044;
+  color: #ffe1e8;
+  height: 80px; }
+
+.navTop .navListRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 1.4em; }
+
+.navTop .navLogo {
+  padding: 1em;
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: inherit;
+  text-decoration: none; }
+
+.navTop .navLogo h2 {
+  margin: 0; }
+
+.navTop .navLogo:hover {
+  cursor: pointer; }
+
+.navTop .navLink {
+  padding: 1.4em 0.6em;
+  font-weight: 600;
+  color: inherit;
+  text-decoration: none; }
+
+.navTop .navLink:hover {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer; }
+
+.centered, .form {
+  width: 600px;
+  margin: auto;
+  padding-top: 3rem; }
+
+.centered h2, .form h2 {
+  display: block;
+  color: #a7002c;
+  text-align: center; }
+
+.listStyle {
+  padding-left: 0; }
+
+.listStyle li {
+  list-style-type: none; }
+
+.form .formSegment {
+  margin-top: 1.4rem; }
+
+.form .input {
+  display: block;
+  outline: none;
+  width: 100%;
+  margin: auto;
+  margin-top: 0.8rem;
+  font-size: 1.0rem;
+  line-height: 1.2rem;
+  padding: 0.4rem;
+  border: 1px solid black;
+  border-radius: 4px; }
+
+.form .input:focus {
+  outline: solid 2px #FF0044; }
+
+.form .inputTextarea {
+  height: 6rem;
+  resize: none; }
+
+.form button {
+  background: none;
+  border: none;
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 10px;
+  font-weight: 800;
+  color: #ffe1e8;
+  background-color: #FF0044;
+  border-radius: 4px; }
+
+.form button:hover {
+  cursor: pointer;
+  background-color: #a7002c; }
+
+.pinBoard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 16px; }
+
+.pinBoard .pin {
+  position: relative;
+  height: 360px;
+  width: 260px;
+  background-color: #534d69;
+  border-radius: 16px;
+  margin: 32px 24px; }
+
+.pinBoard .pin img {
+  filter: brightness(100%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px; }
+
+.pinBoard .pin .pinLabel {
+  position: absolute;
+  left: 5%;
+  bottom: 5%;
+  padding: 4px 16px 4px 8px;
+  background-color: #ffe1e8;
+  border-radius: 8px;
+  display: none; }
+
+.pinBoard .pin .pinLabel h4, .pinBoard .pin .pinLabel .pinTime {
+  margin: 0.2em 0; }
+
+.pinBoard .pin .pinLabel h4 {
+  color: #444;
+  font-weight: bold; }
+
+.pinBoard .pin .pinLabel .pinTime {
+  color: #a7002c;
+  font-weight: lighter;
+  font-size: x-small; }
+
+.pinBoard .pin:hover img {
+  filter: brightness(70%);
+  transition: all 0.3s ease; }
+
+.pinBoard .pin:hover .pinLabel {
+  display: block; }
+
+.centered, .form, .pinDisplay {
+  width: 600px;
+  margin: auto;
+  padding-top: 3rem; }
+
+.centered h2, .form h2, .pinDisplay h2 {
+  display: block;
+  color: #a7002c;
+  text-align: center; }
+
+.listStyle {
+  padding-left: 0; }
+
+.listStyle li {
+  list-style-type: none; }
+
+.form .formSegment {
+  margin-top: 1.4rem; }
+
+.form .input {
+  display: block;
+  outline: none;
+  width: 100%;
+  margin: auto;
+  margin-top: 0.8rem;
+  font-size: 1.0rem;
+  line-height: 1.2rem;
+  padding: 0.4rem;
+  border: 1px solid black;
+  border-radius: 4px; }
+
+.form .input:focus {
+  outline: solid 2px #FF0044; }
+
+.form .inputTextarea {
+  height: 6rem;
+  resize: none; }
+
+.form button {
+  background: none;
+  border: none;
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 10px;
+  font-weight: 800;
+  color: #ffe1e8;
+  background-color: #FF0044;
+  border-radius: 4px; }
+
+.form button:hover {
+  cursor: pointer;
+  background-color: #a7002c; }
+
+.pinDisplay img {
+  width: 100%;
+  border-radius: 16px; }
+
+.centered, .form {
+  width: 600px;
+  margin: auto;
+  padding-top: 3rem; }
+
+.centered h2, .form h2 {
+  display: block;
+  color: #a7002c;
+  text-align: center; }
+
+.listStyle {
+  padding-left: 0; }
+
+.listStyle li {
+  list-style-type: none; }
+
+.form .formSegment {
+  margin-top: 1.4rem; }
+
+.form .input {
+  display: block;
+  outline: none;
+  width: 100%;
+  margin: auto;
+  margin-top: 0.8rem;
+  font-size: 1.0rem;
+  line-height: 1.2rem;
+  padding: 0.4rem;
+  border: 1px solid black;
+  border-radius: 4px; }
+
+.form .input:focus {
+  outline: solid 2px #FF0044; }
+
+.form .inputTextarea {
+  height: 6rem;
+  resize: none; }
+
+.form button {
+  background: none;
+  border: none;
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 10px;
+  font-weight: 800;
+  color: #ffe1e8;
+  background-color: #FF0044;
+  border-radius: 4px; }
+
+.form button:hover {
+  cursor: pointer;
+  background-color: #a7002c; }

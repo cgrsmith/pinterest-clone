@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import Moment from "react-moment";
 import {getUser} from "../store/actions/users";
 
 class UserProfile extends Component {
@@ -16,9 +17,13 @@ class UserProfile extends Component {
         let thisUser =  this.props.user._id === this.props.userId ?
             //User Display once loaded
             <div>
-                <h3>{this.props.user.username}</h3>
+                {console.log(this.props.user.createdAt)}
+                <h2>{this.props.user.username}</h2>
                 <img src={this.props.user.profileImage} alt="Profile Image" />
-                <p>Joined: {this.props.user.createdAt}</p>
+                <span>Joined </span>
+                <Moment className="commentTime" fromNow>
+                    {this.props.user.createdAt} 
+                </Moment>
                 <p>{this.props.user.profileText}</p> 
                 
                 {this.props.currentUser.id === this.props.userId ? //Only show profile edit if profile is current user
@@ -27,7 +32,7 @@ class UserProfile extends Component {
                 </Link>
                 : false}
 
-                <ul>
+                <ul className="listStyle">
                     {this.props.user.posts.map((post, index) => (
                         <Link to={"/posts/" + post._id} key={index}>
                             <li>
@@ -41,7 +46,7 @@ class UserProfile extends Component {
             : <div>Loading User Profile</div> ;
 
         return (
-            <div>
+            <div className="centered">
                 {thisUser}
             </div>
         )

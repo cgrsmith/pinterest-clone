@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import Moment from "react-moment";
 import {getPosts} from "../store/actions/posts";
+
+import testPic from "../images/testPic.jpg";
 
 class PinBoard extends Component {
     constructor(props) {
@@ -15,16 +18,19 @@ class PinBoard extends Component {
     render() {
         let posts = this.props.posts.map(post => {
             return <Link to={"/posts/"+post._id} key={post._id}>
-                    <div>
-                        <img src="" />
-                        <h4>{post.title}</h4>
-                        <p>{post.createdAt}</p>
+                    <div className="pin">
+                        <img src={testPic} />
+                        <div className="pinLabel">
+                            <h4>{post.title}</h4>
+                            <Moment className="pinTime" fromNow>
+                                <span>{post.createdAt}</span>
+                            </Moment>
+                        </div>
                     </div>
                 </Link>
         });
         return (
-            <div>
-                Pinboard
+            <div className="pinBoard">
                 {posts}
             </div>
         )

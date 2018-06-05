@@ -44,18 +44,18 @@ class PinEdit extends Component {
 
     render() {
         return (
-            <div>
+            <div className="form">
                 <form onSubmit={this.handleSubmit}>
-                    <p>Edit Post</p> 
-                    <div>
+                    <h2>Edit Post</h2> 
+                    <div className="formSegment">
                         <label>Post Title: </label>
                         <input type="text" placeholder="" name="postTitle" value={this.state["postTitle"]}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange} className="input inputSmall"/>
                     </div>
-                    <div>
+                    <div className="formSegment">
                         <label>Post Text: </label>
-                        <input type="text" placeholder="" name="postDescription" value={this.state["postDescription"]}
-                            onChange={this.handleChange} />
+                        <textarea name="postDescription" value={this.state["postDescription"]} 
+                            onChange={this.handleChange} className="input inputTextarea"/>
                     </div>
 
                     <button type="submit">

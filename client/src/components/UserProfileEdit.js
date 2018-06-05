@@ -41,18 +41,18 @@ class UserProfileEdit extends Component {
 
     render() {
         return (
-            <div> 
+            <div className="form"> 
                 <form onSubmit={this.handleSubmit}>
-                    <p>Edit User Profile</p> 
-                    <div>
+                    <h2>Edit User Profile</h2> 
+                    <div className="formSegment">
                         <label>Profile Image: </label>
                         <input type="text" placeholder="" name="profileImage" value={this.state["profileImage"]}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange} className="input inputSmall"/>
                     </div>
-                    <div>
+                    <div className="formSegment">
                         <label>Profile Text: </label>
-                        <input type="text" placeholder="" name="profileText" value={this.state["profileText"]}
-                            onChange={this.handleChange} />
+                        <textarea name="profileText" value={this.state["profileText"]} 
+                            onChange={this.handleChange} className="input inputTextarea"/>
                     </div>
 
                     <button type="submit">

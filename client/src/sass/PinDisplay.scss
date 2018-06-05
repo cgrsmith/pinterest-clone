@@ -1,0 +1,10 @@
+@import "base.scss";
+
+.pinDisplay {
+    @extend .centered;
+
+    img {
+        width : 100%;
+        border-radius: 16px;
+    }
+}

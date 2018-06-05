@@ -21,37 +21,38 @@ class Navbar extends Component {
 
     render() {
         let userDisplay = this.props.currentUser.isAuthenticated ?
-            <div>
+            <div className="navListRight">
                 <h3>Hi, {this.props.currentUser.user.username}</h3>
-                <Link to={"/posts/new/"}>
+                <Link to={"/posts/new/"} className="navLink">
                     <span>Create Post</span>
                 </Link>
-                <Link to={"/user/" + this.props.currentUser.user.id}>
+                <Link to={"/user/" + this.props.currentUser.user.id} className="navLink">
                     <span>Profile</span>
                 </Link>
-                <span>
-                    <a onClick={this.logout} >Log Out</a >
-                </span>
+
+                <a onClick={this.logout} className="navLink" >
+                    <span >Log Out</span>
+                </a >
             </div>
             :
-            <div>
-                <span>
-                    <Link to="/signup" className="navLink">Sign Up</Link>
-                </span>
-                <span>
-                    <Link to="/signin" className="navLink">Sign In</Link>
-                </span>
+            <div className="navListRight">
+                <Link to="/signup" className="navLink">
+                    <span>Sign Up</span>
+                </Link>
+                <Link to="/signin" className="navLink">
+                    <span>Sign In</span>
+                </Link>
             </div>
             
         return (
-            <nav>
-                <header>
-                    <Link to="/">
-                        <img src="" alt="Brand Logo" />>
-                    </Link>
-                </header>
+            <nav className="navTop">
+                <Link to="/" className="navLogo">
+                
+                    <img src="" alt="C" />
+                    <h2>Cloneterest</h2>
+                
+                </Link>
                 {userDisplay}
-                <hr />
             </nav>
         )
     }
