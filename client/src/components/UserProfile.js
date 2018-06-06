@@ -4,6 +4,10 @@ import {connect} from "react-redux";
 import Moment from "react-moment";
 import {getUser} from "../store/actions/users";
 
+
+import testPic from "../images/testPic.jpg";
+
+
 class UserProfile extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +23,8 @@ class UserProfile extends Component {
             <div>
                 {console.log(this.props.user.createdAt)}
                 <h2>{this.props.user.username}</h2>
-                <img src={this.props.user.profileImage} alt="Profile Image" />
+                <img src={testPic} alt="Profile Image" />
+                {/* <img src={this.props.user.profileImage} alt="Profile Image" /> */}
                 <span>Joined </span>
                 <Moment className="commentTime" fromNow>
                     {this.props.user.createdAt} 
