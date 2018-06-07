@@ -1,5 +1,7 @@
 import axios from "axios";
 import {addError, clearError} from "./errors";
+import {signinUser, signupUser} from "./users";
+
 
 //User ACtions
 export function setCurrentUser(user) {
@@ -30,23 +32,36 @@ export function logout() {
     }
 }
 
-//type = signin or signup
 export function authUser(type, userData) {
-    return dispatch => {
-        return new Promise((resolve, reject) => {
-            return axios.post("/api/user/" + type, userData)
+    if (type === "signin" ) {
+        return dispatch => {
+            return signinUser(userData)
                 .then(res => {
                     let {token, ...user} = res.data;
                     localStorage.setItem("jwtToken", token);
                     setAuthToken(token);
                     dispatch(setCurrentUser(user));
                     dispatch(clearError());
-                    resolve(); //Successful api call
                 })
                 .catch(err => {
                     dispatch(addError(err.message));
-                    reject(); //Failed api call
+                })   
+        }
+    } else if (type === "signup") {
+        return dispatch => {
+            return signupUser(userData)
+                .then(res => {
+                    let {token, ...user} = res.data;
+                    localStorage.setItem("jwtToken", token);
+                    setAuthToken(token);
+                    dispatch(setCurrentUser(user));
+                    dispatch(clearError());
                 })
-        });
+                .catch(err => {
+                    dispatch(addError(err.message));
+                })
+    
+        }
     }
+    
 }

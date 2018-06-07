@@ -12,6 +12,7 @@ main {
   position: fixed;
   top: 0px;
   width: 100%;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -112,22 +113,26 @@ main {
   justify-content: center;
   padding-top: 16px; }
 
-.pinBoard .pin {
-  position: relative;
+.pinBoard .pinHolder {
   height: 360px;
   width: 260px;
-  background-color: #534d69;
-  border-radius: 16px;
   margin: 32px 24px; }
 
-.pinBoard .pin img {
+.pinBoard .pinHolder .pin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #534d69;
+  border-radius: 16px; }
+
+.pinBoard .pinHolder .pin img {
   filter: brightness(100%);
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 16px; }
 
-.pinBoard .pin .pinLabel {
+.pinBoard .pinHolder .pin .pinLabel {
   position: absolute;
   left: 5%;
   bottom: 5%;
@@ -136,23 +141,23 @@ main {
   border-radius: 8px;
   display: none; }
 
-.pinBoard .pin .pinLabel h4, .pinBoard .pin .pinLabel .pinTime {
+.pinBoard .pinHolder .pin .pinLabel h4, .pinBoard .pinHolder .pin .pinLabel .pinTime {
   margin: 0.2em 0; }
 
-.pinBoard .pin .pinLabel h4 {
+.pinBoard .pinHolder .pin .pinLabel h4 {
   color: #444;
   font-weight: bold; }
 
-.pinBoard .pin .pinLabel .pinTime {
+.pinBoard .pinHolder .pin .pinLabel .pinTime {
   color: #a7002c;
   font-weight: lighter;
   font-size: x-small; }
 
-.pinBoard .pin:hover img {
+.pinBoard .pinHolder .pin:hover img {
   filter: brightness(70%);
   transition: all 0.3s ease; }
 
-.pinBoard .pin:hover .pinLabel {
+.pinBoard .pinHolder .pin:hover .pinLabel {
   display: block; }
 
 .centered, .form, .pinDisplay {

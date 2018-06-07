@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import Dropzone from "react-dropzone";
 
 import {createNewPost} from "../store/actions/posts";
 
@@ -10,10 +11,11 @@ class PinForm extends Component {
         this.state = {
             postTitle : "",
             postDescription : "",
-            postImage : ""
+            postImage : null
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
     }
 
     handleChange(e) {
@@ -22,20 +24,24 @@ class PinForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        let postSubmission = {
-            title : this.state.postTitle,
-            description : this.state.postDescription,
-            image : this.state.postImage,
-            user : this.props.currentUser.id
+        if (this.state.postImage) {
+            let postSubmission = {
+                title : this.state.postTitle,
+                description : this.state.postDescription,
+                user : this.props.currentUser.id
+            }
+            this.props.createNewPost(postSubmission, this.state.postImage)
+                .then(() => {
+                    //this.setState({postTitle : "", postDescription : "", postImage : null});
+                    this.props.history.push("/");
+                })
+                .catch(err => {
+                    return err;
+                });
         }
-        this.props.createNewPost(postSubmission)
-            .then(() => {
-                this.setState({postTitle : "", postDescription : "", postImage : ""});
-                this.props.history.push("/");
-            })
-            .catch(err => {
-                return err;
-            });
+    }
+    handleDrop(imageFile) {
+        this.setState({postImage : imageFile[0]})
     }
 
     render() {
@@ -49,9 +55,18 @@ class PinForm extends Component {
                             onChange={this.handleChange} className="input inputSmall"/>
                     </div>
                     <div className="formSegment">
-                        <label>Post Image: </label>
+                        {/* <label>Post Image: </label>
                         <input type="text" placeholder="" name="postImage" value={this.state["postImage"]}
-                            onChange={this.handleChange} className="input inputSmall"/>
+                            onChange={this.handleChange} className="input inputSmall"/> */}
+                        <Dropzone 
+                            onDrop={this.handleDrop} 
+                            single="true"
+                            accept="image/*" 
+                            //style={styles.dropzone}
+                            className="inputImage"
+                            >
+                            <p>Click here or drag image to upload</p>
+                        </Dropzone>
                     </div>
                     <div className="formSegment">
                         <label>Post Text: </label>

@@ -20,7 +20,7 @@ class PinEnlarged extends Component {
     render() {
         let thisPost =  this.props.post._id === this.props.postId ?
             <div>
-                <img src={testPic}/>
+                <img src={this.props.post.image}/>
                 <h2>{this.props.post.title}</h2>
                 <span>Posted </span>
                 <Moment className="commentTime" format="DD-MM-YYYY">{this.props.post.createdAt}</Moment>

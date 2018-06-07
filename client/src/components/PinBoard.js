@@ -4,8 +4,6 @@ import {connect} from "react-redux";
 import Moment from "react-moment";
 import {getPosts} from "../store/actions/posts";
 
-import testPic from "../images/testPic.jpg";
-
 class PinBoard extends Component {
     constructor(props) {
         super(props);
@@ -17,17 +15,19 @@ class PinBoard extends Component {
 
     render() {
         let posts = this.props.posts.map(post => {
-            return <Link to={"/posts/"+post._id} key={post._id}>
-                    <div className="pin">
-                        <img src={testPic} />
-                        <div className="pinLabel">
-                            <h4>{post.title}</h4>
-                            <Moment className="pinTime" fromNow>
-                                <span>{post.createdAt}</span>
-                            </Moment>
+            return <div className="pinHolder" key={post._id}>
+                    <Link to={"/posts/"+post._id}>
+                        <div className="pin">
+                            <img src={post.image} />
+                            <div className="pinLabel">
+                                <h4>{post.title}</h4>
+                                <Moment className="pinTime" fromNow>
+                                    {post.createdAt}
+                                </Moment>
+                            </div>
                         </div>
-                    </div>
-                </Link>
+                    </Link>
+                </div>
         });
         return (
             <div className="pinBoard">

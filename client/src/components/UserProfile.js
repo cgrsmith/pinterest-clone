@@ -21,10 +21,8 @@ class UserProfile extends Component {
         let thisUser =  this.props.user._id === this.props.userId ?
             //User Display once loaded
             <div>
-                {console.log(this.props.user.createdAt)}
+                <img src={this.props.user.profileImage} alt="Profile Image" />
                 <h2>{this.props.user.username}</h2>
-                <img src={testPic} alt="Profile Image" />
-                {/* <img src={this.props.user.profileImage} alt="Profile Image" /> */}
                 <span>Joined </span>
                 <Moment className="commentTime" fromNow>
                     {this.props.user.createdAt} 

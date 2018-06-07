@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
+import Dropzone from "react-dropzone";
 
 import {editUser} from "../store/actions/users";
 
@@ -8,11 +9,12 @@ class UserProfileEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            profileImage : "",
+            profileImage : null,
             profileText : ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
     }
 
     handleChange(e) {
@@ -27,7 +29,7 @@ class UserProfileEdit extends Component {
         }
         this.props.editUser(this.props.userId, userSubmission)
             .then(() => {
-                this.setState({postTitle : "", postDescription : "", postImage : ""});
+                //this.setState({postTitle : "", postDescription : "", postImage : ""});
                 this.props.history.push("/user/" + this.props.userId);
             })
             .catch(err => {
@@ -35,8 +37,12 @@ class UserProfileEdit extends Component {
             });
     }
 
+    handleDrop(imageFile) {
+        this.setState({profileImage : imageFile[0]})
+    }
+
     componentWillMount() {
-        //this.setState({profileImage : this.props.user.profileImage, profileText : this.props.user.profileText});
+        //this.setState({profileText : this.props.user.profileText});
     }
 
     render() {
@@ -45,9 +51,15 @@ class UserProfileEdit extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <h2>Edit User Profile</h2> 
                     <div className="formSegment">
-                        <label>Profile Image: </label>
-                        <input type="text" placeholder="" name="profileImage" value={this.state["profileImage"]}
-                            onChange={this.handleChange} className="input inputSmall"/>
+                        <Dropzone 
+                            onDrop={this.handleDrop} 
+                            single="true"
+                            accept="image/*" 
+                            //style={styles.dropzone}
+                            className="inputImage"
+                            >
+                            <p>Click here or drag image to upload</p>
+                        </Dropzone>
                     </div>
                     <div className="formSegment">
                         <label>Profile Text: </label>

@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import Dropzone from "react-dropzone";
+
 
 class AuthForm extends Component {
     constructor(props) {
@@ -6,13 +8,14 @@ class AuthForm extends Component {
         this.state = {
             email : "",
             username : "",
-            profileImage : "",
+            profileImage : null,
             profileText : "",
             password : "",
             confirmPassword : ""
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleDrop = this.handleDrop.bind(this);
     }
 
     handleChange(e) {
@@ -39,6 +42,11 @@ class AuthForm extends Component {
                 });
         }
     }
+
+    handleDrop(imageFile) {
+        this.setState({profileImage : imageFile[0]})
+    }
+
     render() {
 
         return (
@@ -57,9 +65,15 @@ class AuthForm extends Component {
                                 onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
                         <div className="formSegment">
-                            <label>Profile Image: </label>
-                            <input type="text" placeholder="" name="profileImage" value={this.state["profileImage"]}
-                                onChange={this.handleChange} className="input inputSmall"/>
+                            <Dropzone 
+                                onDrop={this.handleDrop} 
+                                single="true"
+                                accept="image/*" 
+                                //style={styles.dropzone}
+                                className="inputImage"
+                                >
+                                <p>Click here or drag image to upload</p>
+                            </Dropzone>
                         </div>
                         <div className="formSegment">
                             <label>Profile Text: </label>

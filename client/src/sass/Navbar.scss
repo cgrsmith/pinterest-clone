@@ -10,6 +10,7 @@ $colorSecondary: rgb(255, 225, 232);
     position: fixed;
     top: 0px;
     width: 100%;
+    z-index: 1;
 
     display: flex;
     flex-direction: row;

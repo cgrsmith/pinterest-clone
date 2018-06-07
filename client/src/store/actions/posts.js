@@ -1,5 +1,7 @@
 import axios from "axios";
 import {addError, clearError} from "./errors";
+import {cloudinaryUpload} from "../../services/externalApi";
+
 
 //Post ACtions
 function loadPosts(posts) {
@@ -34,17 +36,30 @@ export function getPosts() {
     }
 }
 
-export function createNewPost(newPost) {
+
+export function createNewPost(newPost, newPostImage) {
     return function(dispatch, getState) {
-        return axios.post("/api/posts", newPost)
-            .then( res => {
-                //do nothing
+        //Temporarily remove Auth header to interact with Clodinary API
+        const authHeader = axios.defaults.headers.common["Authorization"];
+        delete axios.defaults.headers.common["Authorization"];
+        //Upload image to cloudinary
+        return cloudinaryUpload(newPostImage, "post")
+            .then(res => {
+                //Reinsert Auth header
+                axios.defaults.headers.common["Authorization"] = authHeader;
+                axios.post("/api/posts", {
+                    ...newPost,
+                    image : res.data.secure_url
+                })
             })
             .catch(err =>{
+                //Reinsert Auth header in the event of cloudinary failure
+                axios.defaults.headers.common["Authorization"] = authHeader;
                 dispatch(addError(err.message));
             });
     }
 }
+
 
 export function getSinglePost(postId) {
     return function(dispatch) {
