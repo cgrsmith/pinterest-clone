@@ -22,16 +22,18 @@ class PinEnlarged extends Component {
             <div>
                 <img src={this.props.post.image}/>
                 <h2>{this.props.post.title}</h2>
-                <span>Posted </span>
-                <Moment className="commentTime" format="DD-MM-YYYY">{this.props.post.createdAt}</Moment>
-                <span> by </span>
+                <em>
+                    <span>Posted </span>
+                    <Moment className="commentTime" format="DD-MM-YYYY">{this.props.post.createdAt}</Moment>
+                    <span> by </span> 
+                </em>
                 <Link to={"/user/"+this.props.post.user._id}>
                     <span>{this.props.post.user.username}</span>
                 </Link>
                 <p>{this.props.post.description}</p>
                 {this.props.currentUser.id === this.props.post.user._id ? //Only show post edit if profile is current user
-                <Link to={"/posts/" + this.props.postId + "/edit"}>
-                    <span>Edit Post</span>
+                <Link to={"/posts/" + this.props.postId + "/edit"} style={{ textDecoration: 'none' }}>
+                    <button className="button">Edit Post</button>
                 </Link>
                 : false}
 

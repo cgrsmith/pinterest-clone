@@ -1,12 +1,12 @@
 $colorPrimary: #FF0044;
-$colorSecondary: rgb(255, 225, 232);
+$colorSecondary: rgb(255, 195, 209);
 $colorDarkest: rgb(167, 0, 44);
 
 
 .centered {
     width: 600px;
     margin: auto;
-    padding-top: 3rem;
+    //padding-top: 3rem;
 
     h2 {
         display: block;
@@ -20,11 +20,17 @@ $colorDarkest: rgb(167, 0, 44);
     
     li {
         list-style-type: none;
+
+        margin: 0.4rem 0 ;
+        border-bottom: 2px solid $colorSecondary;
+        
     }
 }
 
 .form {
     @extend .centered;
+
+    margin-top: 3rem;
 
     .formSegment {
         margin-top: 1.4rem;
@@ -37,6 +43,7 @@ $colorDarkest: rgb(167, 0, 44);
         display: block;
         outline: none;
         width: 100%;
+        box-sizing: border-box;
         margin: auto;
         margin-top: 0.8rem;
 
@@ -57,25 +64,30 @@ $colorDarkest: rgb(167, 0, 44);
         height: 6rem;
         resize: none;
     }
-    button {
-        background: none;
-        border: none;
-        display: block;
-        margin: auto;
-        margin-top: 1rem;
-        padding: 10px;
+}
 
-        font-weight: 800;
+.button {
+    background: none;
+    text-decoration: none;
+    border: none;
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 10px;
 
-        color: $colorSecondary;
-        background-color: $colorPrimary;
+    font-weight: 800;
 
-        border-radius: 4px;
+    color: $colorSecondary;
+    background-color: $colorPrimary;
 
-        &:hover {
-            cursor: pointer;
-            background-color: $colorDarkest;
-        }
+    border-radius: 4px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $colorDarkest;
     }
 }
 
+.horizontalDivide {
+    border-top: 4px solid $colorPrimary;
+}

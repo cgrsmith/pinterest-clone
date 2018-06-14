@@ -1,6 +1,7 @@
 import axios from "axios";
 import {addError, clearError} from "./errors";
 import {cloudinaryUpload} from "../../services/externalApi";
+import {setCurrentUser} from "./auth";
 
 function loadUserProfile(user) {
     return {

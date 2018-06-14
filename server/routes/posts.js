@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router({mergeParams : true});
 
 const db = require("../models");
-
+const {loginRequired, ensureCorrectUser } = require("../middleware/auth");
 //Routed to api/posts
 
 router
@@ -23,7 +23,7 @@ router
             return next(err);
         }
     })
-    .post(async function(req, res, next) {
+    .post(loginRequired, async function(req, res, next) {
         try {
             let post = await db.Post.create({
                 image : req.body.image,
@@ -72,7 +72,7 @@ router
             return next(err);
         }
     })
-    .put(async function(req, res, next) {
+    .put(ensureCorrectUser, async function(req, res, next) {
         try {
             let updatedPost = await db.Post.findByIdAndUpdate(req.params.id, {
                 image : req.body.image,
@@ -87,7 +87,7 @@ router
             return next(err);
         }
     })
-    .delete(async function(req, res, next) {
+    .delete(ensureCorrectUser, async function(req, res, next) {
         try {
             let deletedPost = await db.Post.findByIdAndRemove(req.params.id);
             return res.status(200).json({});

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router({mergeParams : true});
 
 const db = require("../models/index");
-
+const {loginRequired, ensureCorrectUser } = require("../middleware/auth");
 //Routed to api/posts/:id/comments
 
 router
@@ -21,7 +21,7 @@ router
             return next(err);
         }
     })
-    .post(async function(req, res, next) {
+    .post(loginRequired, async function(req, res, next) {
         try {
             let comment = await db.Comment.create({
                 text : req.body.text,
@@ -58,7 +58,7 @@ router
     //         return next(err);
     //     }
     // })
-    .delete(async function(req, res, next) {
+    .delete(ensureCorrectUser, async function(req, res, next) {
         try {
             let deletedComment = await db.Comment.findByIdAndRemove(req.params.commentId);
             return res.status(200).json({});

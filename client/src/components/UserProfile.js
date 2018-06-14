@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Moment from "react-moment";
 import {getUser} from "../store/actions/users";
 
+import UserPostList from "./UserPostList";
 
 import testPic from "../images/testPic.jpg";
 
@@ -16,6 +17,7 @@ class UserProfile extends Component {
         if (this.props.user._id !== this.props.userId) {
             this.props.getUser(this.props.userId);
         }
+        
     }
     render() {
         let thisUser =  this.props.user._id === this.props.userId ?
@@ -30,26 +32,18 @@ class UserProfile extends Component {
                 <p>{this.props.user.profileText}</p> 
                 
                 {this.props.currentUser.id === this.props.userId ? //Only show profile edit if profile is current user
-                <Link to={"/user/" + this.props.userId + "/edit"}>
-                    <span>Edit Profile</span>
-                </Link>
+                    <Link to={"/user/" + this.props.userId + "/edit"} style={{ textDecoration: 'none' }}>
+                        <button className="button">Edit Profile</button>
+                    </Link>
                 : false}
-
-                <ul className="listStyle">
-                    {this.props.user.posts.map((post, index) => (
-                        <Link to={"/posts/" + post._id} key={index}>
-                            <li>
-                                {post.title}
-                            </li>
-                        </Link>
-                    ))}
-                </ul>
+                
+                <UserPostList posts={this.props.user.posts} />
             </div>
             //User Display prior to user being loaded
             : <div>Loading User Profile</div> ;
 
         return (
-            <div className="centered">
+            <div className="centered pinDisplay">
                 {thisUser}
             </div>
         )

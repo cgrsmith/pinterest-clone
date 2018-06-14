@@ -47,7 +47,7 @@ class UserProfileEdit extends Component {
 
     render() {
         return (
-            <div className="form"> 
+            <div className="form pinDisplay">
                 <form onSubmit={this.handleSubmit}>
                     <h2>Edit User Profile</h2> 
                     <div className="formSegment">
@@ -67,7 +67,7 @@ class UserProfileEdit extends Component {
                             onChange={this.handleChange} className="input inputTextarea"/>
                     </div>
 
-                    <button type="submit">
+                    <button className="button" type="submit">
                         Submit
                     </button>
                 </form> 

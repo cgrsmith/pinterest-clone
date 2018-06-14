@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../models/index");
 
+const {loginRequired, ensureCorrectUser } = require("../middleware/auth");
+
 //routed to api/user
 
 router
@@ -80,19 +82,24 @@ router
     .get(async function(req, res, next) {
         try {
             let user = await db.User.findById(req.params.id)
-                .populate("posts", {
-                    title : true
+                .populate({
+                    path : "posts",
+                    select : "title createdAt image",
+                    options : {
+                        sort : {createdAt : "desc"},
+                        limit : 10,
+                    }
                 })
-                .populate("comments", {
-                    text : true,
-                    post : true
-                });
+                // .populate("comments", {
+                //     text : true,
+                //     post : true
+                // });
             return res.status(200).json(user);
         } catch(err) {
             return next(err);
         }
     })
-    .put(async function(req, res, next) {
+    .put(ensureCorrectUser, async function(req, res, next) {
         try {
             let updatedUser = await db.User.findByIdAndUpdate(req.params.id, {
                 profileText : req.body.profileText,

@@ -34,32 +34,30 @@ class CommentsList extends Component {
 
     render() {
         let commentsList =  (this.props.commentsPost === this.props.postId) ?
-            this.props.comments.map((comment, index) => (
-                <li className="comments" key={index}>
-                    <hr />
-                    <Link to={"/user/"+comment.user._id}>
-                        <span className="commentAuthor">{comment.user.username}</span>
-                    </Link>
-                    <span> - </span>
-                    <Moment className="commentTime" fromNow>{comment.createdAt}</Moment>
-                    <p>{comment.text}</p>
-                    {/* {index < this.props.comments.length ?
-                        <hr /> : null
-                    } */}
-                </li>
-            ))
+            this.props.comments.length === 0 ? 
+                <li><em>No Comments</em></li> :
+                this.props.comments.map((comment, index) => (
+                    <li className="comments" key={index}>
+                        <Link to={"/user/"+comment.user._id}>
+                            <span className="commentAuthor">{comment.user.username}</span>
+                        </Link>
+                        <span> - </span>
+                        <Moment className="commentTime" fromNow>{comment.createdAt}</Moment>
+                        <p>{comment.text}</p>
+                    </li>
+                ))
             :
             <li>Loading Comments</li>
 
         return (
-            <div  className="form">
+            <div  className="form horizontalDivide">
                 <form onSubmit={this.handleSubmit}>
                     <h4>Add a Comment:</h4>
                     <textarea value={this.state.newComment} onChange={this.handleChange}
                          className="input inputTextarea"/>
-                    <button type="submit">Submit Comment</button>
+                    <button className="button" type="submit">Submit Comment</button>
                 </form>
-                <ul className="commentList">
+                <ul className="listStyle">
                     {commentsList}
                 </ul>
             </div>

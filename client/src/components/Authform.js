@@ -50,7 +50,7 @@ class AuthForm extends Component {
     render() {
 
         return (
-            <div className="form">
+            <div className="form pinDisplay">
                 {this.props.signup ?
                     <form onSubmit={this.handleSubmit}>
                         <h2>signup</h2> 
@@ -90,7 +90,7 @@ class AuthForm extends Component {
                             <input type="text" placeholder="" name="confirmPassword" value={this.state["confirmPassword"]}
                                 onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
-                        <button type="submit">
+                        <button className="button" type="submit">
                             Sign Up
                         </button>
                     </form> 
@@ -108,7 +108,7 @@ class AuthForm extends Component {
                                 onChange={this.handleChange} required className="input inputSmall"/>
                         </div>
 
-                        <button type="submit">
+                        <button className="button" type="submit">
                             Sign In
                         </button>
                     </form>
